@@ -252,12 +252,14 @@ dataRender();
 async function renderModal(data) {
   const result = await fetch(`https://restcountries.com/v2/all`);
   const res = await result.json();
+
   res.forEach((item) => {
     if (item.name == data) {
       console.log(data);
-      localStorage.setItem("data", data)
+
+      localStorage.setItem("data", data);
       localStorage.setItem("name", item.nativeName);
-  
+    
       const modal = crElement(
         "div",
         "card-bookmark d-flex align-items-center mt-4",
@@ -273,12 +275,11 @@ async function renderModal(data) {
    `
       );
       $(".sidebar-bookmarks-wrapper").appendChild(modal);
-     
     }
   });
 }
-      let dataName = localStorage.getItem("data");
-      let dataName2 = localStorage.getItem("name");
+let dataName = localStorage.getItem("data");
+let dataName2 = localStorage.getItem("name");
 
 $(".sidebar-bookmarks-wrapper").innerHTML = `
 <div class="card-bookmark d-flex align-items-center mt-4">
@@ -297,11 +298,11 @@ async function renderModal2(data) {
 
   res.forEach((item) => {
     if (item.name == data) {
-
+        $(".Mybook").innerHTML = "";
       const modal2 = crElement(
         "div",
         "card-redmore",
-   `                       
+        `                       
 <img src="${item.flags.png}" class="img-fluid mt-5 mb-5 mx-auto d-block" alt="imh">
                  <div class="card-body">
                      <div class="card-description w-75 mx-auto">
