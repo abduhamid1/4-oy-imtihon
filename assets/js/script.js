@@ -254,12 +254,16 @@ async function renderModal(data) {
   const res = await result.json();
   res.forEach((item) => {
     if (item.name == data) {
+      console.log(data);
+      localStorage.setItem("data", data)
+      localStorage.setItem("name", item.nativeName);
+  
       const modal = crElement(
         "div",
         "card-bookmark d-flex align-items-center mt-4",
         `                       
   <div class="card-bookmark-text">
-                                        <h5 class="fs-5">${data}[</h5>
+                                        <h5 class="fs-5">${dataName}[</h5>
                                         <p class="bokmark-info mb-0">${item.nativeName}</p>
                                     </div>
                                     <div class="card-bookmark-imgs mx-3 d-flex justify-content-end">
@@ -269,21 +273,36 @@ async function renderModal(data) {
    `
       );
       $(".sidebar-bookmarks-wrapper").appendChild(modal);
+     
     }
   });
 }
+      let dataName = localStorage.getItem("data");
+      let dataName2 = localStorage.getItem("name");
+
+$(".sidebar-bookmarks-wrapper").innerHTML = `
+<div class="card-bookmark d-flex align-items-center mt-4">
+  <div class="card-bookmark-text">
+                                        <h5 class="fs-5">${dataName}</h5>
+                                        <p class="bokmark-info mb-0">${dataName2}</p>
+                                    </div>
+                                    <div class="card-bookmark-imgs mx-3 d-flex justify-content-end">
+                                        <img src="./images/book.png" class="mx-2" alt="img">
+                                        <img src="./images/book-delet.png" class="mx-2" alt="img">
+                                    </div>
+                                    </div>`;
 async function renderModal2(data) {
   const result = await fetch(`https://restcountries.com/v2/all`);
   const res = await result.json();
 
   res.forEach((item) => {
     if (item.name == data) {
-      $(".Mybook").innerHTML = "";
+
       const modal2 = crElement(
         "div",
         "card-redmore",
    `                       
-            <img src="${item.flags.png}" class="img-fluid mt-5 mb-5 mx-auto d-block" alt="imh">
+<img src="${item.flags.png}" class="img-fluid mt-5 mb-5 mx-auto d-block" alt="imh">
                  <div class="card-body">
                      <div class="card-description w-75 mx-auto">
                         <p> Culpa nulla pariatur cupidatat nisi incididunt ea do ipsum. Incididunt quis mollit elit
